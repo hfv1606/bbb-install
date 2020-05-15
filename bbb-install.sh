@@ -185,7 +185,7 @@ main() {
     esac
   done
   
-  if [ ! -z "$ADDON" ]; then
+  if [ ! -z "$INSTALL" ]; then
     case $INSTALL in
       bbb)
         install_bbb
