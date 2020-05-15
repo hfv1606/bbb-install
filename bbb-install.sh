@@ -188,19 +188,20 @@ main() {
   if [ ! -z "$ADDON" ]; then
     case $INSTALL in
       bbb)
-          install_bbb
-          ;;
+        install_bbb
+        ;;
       ssl)
-          if [ ! -z "$PROVIDED_CERTIFICATE" ] ; then
-            install_ssl
-          elif [ ! -z "$HOST" ] && [ ! -z "$EMAIL" ] ; then
-            install_ssl
-          else
-            echo "cannot install ssl, please provide -d or -s and -e options"
-          fi          ;;
+        if [ ! -z "$PROVIDED_CERTIFICATE" ] ; then
+          install_ssl
+        elif [ ! -z "$HOST" ] && [ ! -z "$EMAIL" ] ; then
+          install_ssl
+        else
+          echo "cannot install ssl, please provide -d or -s and -e options"
+        fi          
+        ;;
       greenlight)
-          install_greenlight
-          ;;
+        install_greenlight
+        ;;
       :)
         err "Missing addon"
         exit 1
