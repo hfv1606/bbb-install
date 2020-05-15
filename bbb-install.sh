@@ -115,7 +115,7 @@ main() {
 
   need_x64
 
-  while builtin getopts "hs:r:c:v:e:p:m:lxgtad" opt "${@}"; do
+  while builtin getopts "i:hs:r:c:v:e:p:m:lxgtad" opt "${@}"; do
 
     case $opt in
       h)
