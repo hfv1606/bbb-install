@@ -170,7 +170,9 @@ main() {
       d)
         PROVIDED_CERTIFICATE=true
         ;;
-
+      i)
+        INSTALL=$OPTARG
+        ;;
       :)
         err "Missing option argument for -$OPTARG"
         exit 1
@@ -182,7 +184,39 @@ main() {
         ;;
     esac
   done
+  
+  if [ ! -z "$ADDON" ]; then
+    case $INSTALL in
+      bbb)
+          install_bbb
+          ;;
+      ssl)
+          if [ ! -z "$PROVIDED_CERTIFICATE" ] ; then
+            install_ssl
+          elif [ ! -z "$HOST" ] && [ ! -z "$EMAIL" ] ; then
+            install_ssl
+          else
+            echo "cannot install ssl, please provide -d or -s and -e options"
+          fi          ;;
+      greenlight)
+          install_greenlight
+          ;;
+      :)
+        err "Missing addon"
+        exit 1
+        ;;
 
+      \?)
+        err "Invalid addon: -$OPTARG" >&2
+        usage
+        ;;
+    esac
+  else
+      install_bbb
+  fi   
+}
+
+install_bbb() {
   check_apache2
 
   if [ ! -z "$PROXY" ]; then
@@ -1107,4 +1141,3 @@ HERE
 }
 
 main "$@" || exit 1
-
